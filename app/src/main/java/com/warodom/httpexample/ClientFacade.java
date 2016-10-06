@@ -5,7 +5,7 @@ import com.loopj.android.http.*;
 
 class ClientFacade {
 
-    private static final String BASE_URL = "http://Server_IP/laravel/www/public/";
+    private static final String BASE_URL = "http://ServerIP/public/android/";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
@@ -21,3 +21,4 @@ class ClientFacade {
         return BASE_URL + relativeUrl;
     }
 }
+

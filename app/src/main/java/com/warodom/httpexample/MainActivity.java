@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.*;
 import org.json.*;
@@ -52,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        try {
+//            postMessage("mypost.php");
+            postMessage("testPost");
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void getMessage(String path) throws JSONException {
@@ -108,4 +117,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void postMessage(String path)  {
+        RequestParams params = new RequestParams();
+        params.put("id", "1");
+        params.put("message","Hello my message final");
+        params.put("_token","AZzS6jPpsdlWv9nNTByaE3OIj4I1FQg8hrhHXkH8");
+
+        ClientFacade.post(path, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d("----", "failure: "+ statusCode);
+                Log.d("----", "failure: "+ responseString);
+                Toast.makeText(MainActivity.this, responseString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.d("----", "success: "+ statusCode);
+                Log.d("----", "success: "+ responseString);
+            }
+        });
+    }
 }
+
